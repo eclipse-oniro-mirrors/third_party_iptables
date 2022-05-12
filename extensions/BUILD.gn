@@ -1,0 +1,264 @@
+# Copyright (c) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+
+exec_script("genClear.py")
+
+config("ext_config") {
+  cflags = [
+    "-D_LARGEFILE_SOURCE=1",
+    "-D_LARGE_FILES",
+    "-D_FILE_OFFSET_BITS=64",
+    "-D_REENTRANT",
+    "-DENABLE_IPV4",
+    "-DENABLE_IPV6",
+    "-Wall",
+    "-Wno-error",
+    "-Wno-pointer-arith",
+    "-Wno-sign-compare",
+    "-Wno-unused-parameter",
+    "-DNO_SHARED_LIBS=1",
+    "-DXTABLES_INTERNAL",
+    "-Wno-format",
+    "-Wno-missing-field-initializers",
+    "-Wno-pointer-bool-conversion",
+    "-Wno-tautological-pointer-compare",
+  ]
+}
+
+args_libext = [
+  "libxt_",
+  "[libxt_cgroup.c,libxt_ipvs.c,libxt_TCPOPTSTRIP.c,libxt_connlabel.c,libxt_dccp.c]",
+  "initext.c",
+  "extensions",
+]
+
+exec_script("genInit.py", args_libext)
+
+ohos_static_library("libext") {
+  sources = [
+    "//third_party/iptables/extensions/gen/initext.c",
+    "//third_party/iptables/extensions/gen/libxt_AUDIT.c",
+
+    #"//third_party/iptables/extensions/gen/libxt_cgroup.c",
+    "//third_party/iptables/extensions/gen/libxt_CHECKSUM.c",
+    "//third_party/iptables/extensions/gen/libxt_CLASSIFY.c",
+    "//third_party/iptables/extensions/gen/libxt_CONNMARK.c",
+    "//third_party/iptables/extensions/gen/libxt_CONNSECMARK.c",
+    "//third_party/iptables/extensions/gen/libxt_CT.c",
+    "//third_party/iptables/extensions/gen/libxt_DSCP.c",
+    "//third_party/iptables/extensions/gen/libxt_HMARK.c",
+    "//third_party/iptables/extensions/gen/libxt_IDLETIMER.c",
+
+    #"//third_party/iptables/extensions/gen/libxt_ipvs.c",
+    "//third_party/iptables/extensions/gen/libxt_LED.c",
+    "//third_party/iptables/extensions/gen/libxt_MARK.c",
+    "//third_party/iptables/extensions/gen/libxt_NFLOG.c",
+    "//third_party/iptables/extensions/gen/libxt_NFQUEUE.c",
+    "//third_party/iptables/extensions/gen/libxt_RATEEST.c",
+    "//third_party/iptables/extensions/gen/libxt_SECMARK.c",
+    "//third_party/iptables/extensions/gen/libxt_SET.c",
+    "//third_party/iptables/extensions/gen/libxt_SYNPROXY.c",
+    "//third_party/iptables/extensions/gen/libxt_TCPMSS.c",
+
+    #"//third_party/iptables/extensions/gen/libxt_TCPOPTSTRIP.c",
+    "//third_party/iptables/extensions/gen/libxt_TEE.c",
+    "//third_party/iptables/extensions/gen/libxt_TOS.c",
+    "//third_party/iptables/extensions/gen/libxt_TPROXY.c",
+    "//third_party/iptables/extensions/gen/libxt_TRACE.c",
+    "//third_party/iptables/extensions/gen/libxt_addrtype.c",
+    "//third_party/iptables/extensions/gen/libxt_bpf.c",
+    "//third_party/iptables/extensions/gen/libxt_cluster.c",
+    "//third_party/iptables/extensions/gen/libxt_comment.c",
+    "//third_party/iptables/extensions/gen/libxt_connbytes.c",
+
+    #"//third_party/iptables/extensions/gen/libxt_connlabel.c",
+    "//third_party/iptables/extensions/gen/libxt_connlimit.c",
+    "//third_party/iptables/extensions/gen/libxt_connmark.c",
+    "//third_party/iptables/extensions/gen/libxt_conntrack.c",
+    "//third_party/iptables/extensions/gen/libxt_cpu.c",
+
+    #"//third_party/iptables/extensions/gen/libxt_dccp.c",
+    "//third_party/iptables/extensions/gen/libxt_devgroup.c",
+    "//third_party/iptables/extensions/gen/libxt_dscp.c",
+    "//third_party/iptables/extensions/gen/libxt_ecn.c",
+    "//third_party/iptables/extensions/gen/libxt_esp.c",
+    "//third_party/iptables/extensions/gen/libxt_hashlimit.c",
+    "//third_party/iptables/extensions/gen/libxt_helper.c",
+    "//third_party/iptables/extensions/gen/libxt_ipcomp.c",
+    "//third_party/iptables/extensions/gen/libxt_iprange.c",
+    "//third_party/iptables/extensions/gen/libxt_length.c",
+    "//third_party/iptables/extensions/gen/libxt_limit.c",
+    "//third_party/iptables/extensions/gen/libxt_mac.c",
+    "//third_party/iptables/extensions/gen/libxt_mark.c",
+    "//third_party/iptables/extensions/gen/libxt_multiport.c",
+    "//third_party/iptables/extensions/gen/libxt_nfacct.c",
+    "//third_party/iptables/extensions/gen/libxt_osf.c",
+    "//third_party/iptables/extensions/gen/libxt_owner.c",
+    "//third_party/iptables/extensions/gen/libxt_physdev.c",
+    "//third_party/iptables/extensions/gen/libxt_pkttype.c",
+    "//third_party/iptables/extensions/gen/libxt_policy.c",
+    "//third_party/iptables/extensions/gen/libxt_quota.c",
+    "//third_party/iptables/extensions/gen/libxt_rateest.c",
+    "//third_party/iptables/extensions/gen/libxt_recent.c",
+    "//third_party/iptables/extensions/gen/libxt_rpfilter.c",
+    "//third_party/iptables/extensions/gen/libxt_sctp.c",
+    "//third_party/iptables/extensions/gen/libxt_set.c",
+    "//third_party/iptables/extensions/gen/libxt_socket.c",
+    "//third_party/iptables/extensions/gen/libxt_standard.c",
+    "//third_party/iptables/extensions/gen/libxt_statistic.c",
+    "//third_party/iptables/extensions/gen/libxt_string.c",
+    "//third_party/iptables/extensions/gen/libxt_tcp.c",
+    "//third_party/iptables/extensions/gen/libxt_tcpmss.c",
+    "//third_party/iptables/extensions/gen/libxt_time.c",
+    "//third_party/iptables/extensions/gen/libxt_tos.c",
+    "//third_party/iptables/extensions/gen/libxt_u32.c",
+    "//third_party/iptables/extensions/gen/libxt_udp.c",
+  ]
+  include_dirs = [
+    "//third_party/iptables",
+    "//third_party/iptables/extensions",
+    "//third_party/iptables/include",
+    "//third_party/iptables/iptables",
+    "//third_party/iptables/libiptc",
+  ]
+  configs = [ ":ext_config" ]
+  deps = []
+  part_name = "netmanager_standard"
+  subsystem_name = "communication"
+}
+
+args_libext4 = [
+  "libipt",
+  "[]",
+  "initext4.c",
+  "extensions4",
+]
+
+exec_script("genInit.py", args_libext4)
+
+ohos_static_library("libext4") {
+  sources = [
+    "//third_party/iptables/extensions/gen/initext4.c",
+    "//third_party/iptables/extensions/gen/libipt_CLUSTERIP.c",
+    "//third_party/iptables/extensions/gen/libipt_DNAT.c",
+    "//third_party/iptables/extensions/gen/libipt_ECN.c",
+    "//third_party/iptables/extensions/gen/libipt_LOG.c",
+    "//third_party/iptables/extensions/gen/libipt_MASQUERADE.c",
+    "//third_party/iptables/extensions/gen/libipt_NETMAP.c",
+    "//third_party/iptables/extensions/gen/libipt_REDIRECT.c",
+    "//third_party/iptables/extensions/gen/libipt_REJECT.c",
+    "//third_party/iptables/extensions/gen/libipt_SNAT.c",
+    "//third_party/iptables/extensions/gen/libipt_TTL.c",
+    "//third_party/iptables/extensions/gen/libipt_ULOG.c",
+    "//third_party/iptables/extensions/gen/libipt_ah.c",
+    "//third_party/iptables/extensions/gen/libipt_icmp.c",
+    "//third_party/iptables/extensions/gen/libipt_realm.c",
+    "//third_party/iptables/extensions/gen/libipt_ttl.c",
+  ]
+  include_dirs = [
+    "//third_party/iptables",
+    "//third_party/iptables/extensions",
+    "//third_party/iptables/include",
+    "//third_party/iptables/iptables",
+    "//third_party/iptables/libiptc",
+  ]
+  cflags = [
+    "-D_LARGEFILE_SOURCE=1",
+    "-D_LARGE_FILES",
+    "-D_FILE_OFFSET_BITS=64",
+    "-D_REENTRANT",
+    "-DENABLE_IPV4",
+    "-DENABLE_IPV6",
+    "-Wall",
+    "-Werror",
+    "-Wno-pointer-arith",
+    "-Wno-sign-compare",
+    "-Wno-unused-parameter",
+    "-DNO_SHARED_LIBS=1",
+    "-DXTABLES_INTERNAL",
+    "-Wno-format",
+    "-Wno-missing-field-initializers",
+    "-Wno-pointer-bool-conversion",
+    "-Wno-tautological-pointer-compare",
+  ]
+  deps = []
+  part_name = "netmanager_base"
+  subsystem_name = "communication"
+}
+
+args_libext6 = [
+  "libip6t_",
+  "[]",
+  "initext6.c",
+  "extensions6",
+]
+
+exec_script("genInit.py", args_libext6)
+
+ohos_static_library("libext6") {
+  sources = [
+    "//third_party/iptables/extensions/gen/initext6.c",
+    "//third_party/iptables/extensions/gen/libip6t_DNAT.c",
+    "//third_party/iptables/extensions/gen/libip6t_DNPT.c",
+    "//third_party/iptables/extensions/gen/libip6t_HL.c",
+    "//third_party/iptables/extensions/gen/libip6t_LOG.c",
+    "//third_party/iptables/extensions/gen/libip6t_MASQUERADE.c",
+    "//third_party/iptables/extensions/gen/libip6t_NETMAP.c",
+    "//third_party/iptables/extensions/gen/libip6t_REDIRECT.c",
+    "//third_party/iptables/extensions/gen/libip6t_REJECT.c",
+    "//third_party/iptables/extensions/gen/libip6t_SNAT.c",
+    "//third_party/iptables/extensions/gen/libip6t_SNPT.c",
+    "//third_party/iptables/extensions/gen/libip6t_ah.c",
+    "//third_party/iptables/extensions/gen/libip6t_dst.c",
+    "//third_party/iptables/extensions/gen/libip6t_eui64.c",
+    "//third_party/iptables/extensions/gen/libip6t_frag.c",
+    "//third_party/iptables/extensions/gen/libip6t_hbh.c",
+    "//third_party/iptables/extensions/gen/libip6t_hl.c",
+    "//third_party/iptables/extensions/gen/libip6t_icmp6.c",
+    "//third_party/iptables/extensions/gen/libip6t_ipv6header.c",
+    "//third_party/iptables/extensions/gen/libip6t_mh.c",
+    "//third_party/iptables/extensions/gen/libip6t_rt.c",
+    "//third_party/iptables/extensions/gen/libip6t_srh.c",
+  ]
+  include_dirs = [
+    "//third_party/iptables",
+    "//third_party/iptables/extensions",
+    "//third_party/iptables/include",
+    "//third_party/iptables/iptables",
+    "//third_party/iptables/libiptc",
+  ]
+  cflags = [
+    "-D_LARGEFILE_SOURCE=1",
+    "-D_LARGE_FILES",
+    "-D_FILE_OFFSET_BITS=64",
+    "-D_REENTRANT",
+    "-DENABLE_IPV4",
+    "-DENABLE_IPV6",
+    "-Wall",
+    "-Werror",
+    "-Wno-pointer-arith",
+    "-Wno-sign-compare",
+    "-Wno-unused-parameter",
+    "-DNO_SHARED_LIBS=1",
+    "-DXTABLES_INTERNAL",
+    "-Wno-format",
+    "-Wno-missing-field-initializers",
+    "-Wno-pointer-bool-conversion",
+    "-Wno-tautological-pointer-compare",
+  ]
+  deps = []
+  part_name = "netmanager_base"
+  subsystem_name = "communication"
+}
