@@ -1,0 +1,11 @@
+[
+    {
+        "Name"                  : "iptables",
+        "License"               : "GPL V2.0",
+        "License File"          : "COPYING",
+        "Version Number"        : "v1.8.7",
+        "Owner"                 : "lichunlin2@huawei.com",
+        "Upstream URL"          : "https://netfilter.org/",
+        "Description"           : "iptables is the userspace command line program used to configure the Linux 2.4.x and later packet filtering ruleset. It is targeted towards system administrators."
+    }
+]
