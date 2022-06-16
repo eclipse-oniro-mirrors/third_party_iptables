@@ -54,6 +54,7 @@ ohos_executable("iptables") {
     "//third_party/iptables/iptables",
     "//third_party/iptables/libiptc",
   ]
+  license_file = "//third_party/iptables/COPYING"
   configs = [ ":iptables_config" ]
 
   install_enable = true

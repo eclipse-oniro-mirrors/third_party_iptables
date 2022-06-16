@@ -26,7 +26,7 @@ ohos_static_library("libxtables") {
     "//third_party/iptables/iptables",
     "//third_party/iptables/libiptc",
   ]
-
+  license_file = "//third_party/iptables/COPYING"
   cflags = [
     "-D_LARGEFILE_SOURCE=1",
     "-D_LARGE_FILES",
