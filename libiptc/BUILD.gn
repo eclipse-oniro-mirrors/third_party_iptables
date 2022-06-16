@@ -50,7 +50,7 @@ ohos_static_library("libip6tc") {
     "//third_party/iptables/libiptc",
     "//third_party/iptables/include",
   ]
-
+  license_file = "//third_party/iptables/COPYING"
   cflags = [
     "-D_LARGEFILE_SOURCE=1",
     "-D_LARGE_FILES",
