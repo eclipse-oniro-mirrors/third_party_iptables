@@ -1,0 +1,31 @@
+{
+    "name": "@ohos/iptables",
+    "description": "iptables is the userspace command line program used to configure the Linux 2.4.x and later packet filtering ruleset. It is targeted towards system administrators.",
+    "version": "v1.8.7",
+    "license": "GPL V2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "third_party/iptables"
+    },
+    "dirs": {},
+    "scripts": {},
+    "licensePath": "COPYING",
+    "component": {
+        "name": "iptables",
+        "subsystem": "thirdparty",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": [],
+            "third_party": []
+        },
+        "build": {
+            "sub_component": [],
+            "inner_kits": [],
+            "test": []
+        }
+    }
+}
