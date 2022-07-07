@@ -178,6 +178,7 @@ cluster.' desc=""/>
                 <policyitem type="compatibility" name="GPL" path="extensions/libipt_TTL.c" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc=""/>
                 <policyitem type="compatibility" name="GPL" path="extensions/libip6t_HL.c" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc=""/>
                 <policyitem type="compatibility" name="libipt_CLUSTERIP.man" path="extensions/libipt_CLUSTERIP.man" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc=""/>
+                <policyitem type="license" name="*" path=".*" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc=""/>
             </policy>
         </policylist>
     </oatconfig>
