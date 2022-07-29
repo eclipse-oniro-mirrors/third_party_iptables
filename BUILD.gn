@@ -71,3 +71,77 @@ ohos_executable("iptables") {
   part_name = "netmanager_base"
   subsystem_name = "communication"
 }
+
+ohos_executable("iptables-save") {
+  sources = [
+    "//third_party/iptables/iptables/ip6tables-standalone.c",
+    "//third_party/iptables/iptables/ip6tables.c",
+    "//third_party/iptables/iptables/iptables-restore.c",
+    "//third_party/iptables/iptables/iptables-save.c",
+    "//third_party/iptables/iptables/iptables-standalone.c",
+    "//third_party/iptables/iptables/iptables-xml.c",
+    "//third_party/iptables/iptables/iptables.c",
+    "//third_party/iptables/iptables/xshared.c",
+    "//third_party/iptables/iptables/xtables-legacy-multi.c",
+  ]
+
+  include_dirs = [
+    "//third_party/iptables",
+    "//third_party/iptables/extensions",
+    "//third_party/iptables/include",
+    "//third_party/iptables/iptables",
+    "//third_party/iptables/libiptc",
+  ]
+  configs = [ ":iptables_config" ]
+
+  install_enable = true
+
+  deps = [
+    "//third_party/iptables/extensions:libext",
+    "//third_party/iptables/extensions:libext4",
+    "//third_party/iptables/extensions:libext6",
+    "//third_party/iptables/libiptc:libip4tc",
+    "//third_party/iptables/libiptc:libip6tc",
+    "//third_party/iptables/libxtables:libxtables",
+  ]
+
+  part_name = "netmanager_base"
+  subsystem_name = "communication"
+}
+
+ohos_executable("iptables-restore") {
+  sources = [
+    "//third_party/iptables/iptables/ip6tables-standalone.c",
+    "//third_party/iptables/iptables/ip6tables.c",
+    "//third_party/iptables/iptables/iptables-restore.c",
+    "//third_party/iptables/iptables/iptables-save.c",
+    "//third_party/iptables/iptables/iptables-standalone.c",
+    "//third_party/iptables/iptables/iptables-xml.c",
+    "//third_party/iptables/iptables/iptables.c",
+    "//third_party/iptables/iptables/xshared.c",
+    "//third_party/iptables/iptables/xtables-legacy-multi.c",
+  ]
+
+  include_dirs = [
+    "//third_party/iptables",
+    "//third_party/iptables/extensions",
+    "//third_party/iptables/include",
+    "//third_party/iptables/iptables",
+    "//third_party/iptables/libiptc",
+  ]
+  configs = [ ":iptables_config" ]
+
+  install_enable = true
+
+  deps = [
+    "//third_party/iptables/extensions:libext",
+    "//third_party/iptables/extensions:libext4",
+    "//third_party/iptables/extensions:libext6",
+    "//third_party/iptables/libiptc:libip4tc",
+    "//third_party/iptables/libiptc:libip6tc",
+    "//third_party/iptables/libxtables:libxtables",
+  ]
+
+  part_name = "netmanager_base"
+  subsystem_name = "communication"
+}
