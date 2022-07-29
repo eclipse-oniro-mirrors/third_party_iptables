@@ -110,6 +110,7 @@ ohos_static_library("libext") {
     "//third_party/iptables/extensions/gen/libxt_pkttype.c",
     "//third_party/iptables/extensions/gen/libxt_policy.c",
     "//third_party/iptables/extensions/gen/libxt_quota.c",
+    "//third_party/iptables/extensions/gen/libxt_quota2.c",
     "//third_party/iptables/extensions/gen/libxt_rateest.c",
     "//third_party/iptables/extensions/gen/libxt_recent.c",
     "//third_party/iptables/extensions/gen/libxt_rpfilter.c",
