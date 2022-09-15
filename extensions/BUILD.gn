@@ -13,8 +13,6 @@
 
 import("//build/ohos.gni")
 
-exec_script("genClear.py")
-
 config("ext_config") {
   cflags = [
     "-D_LARGEFILE_SOURCE=1",
