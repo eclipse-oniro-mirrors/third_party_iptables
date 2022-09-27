@@ -15,7 +15,8 @@
 import os
 import shutil
 oriPath = os.path.dirname(os.path.abspath(__file__))
-newPath = oriPath+"/gen"
+out_path = os.path.dirname(os.path.dirname(os.path.dirname(oriPath)))
+newPath = oriPath + "/out/gen"
 isExists=os.path.exists(newPath)
 # 判断结果
 if not isExists:
