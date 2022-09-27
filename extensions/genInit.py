@@ -78,11 +78,11 @@ def main():
     ori_path = os.path.dirname(os.path.abspath(__file__))
     out_path = os.path.dirname(os.path.dirname(os.path.dirname(ori_path)))
     out_path += "/out"
-    gen_path = out_path+"/gen"
-    md5_path = out_path+"/gen/md5"
+    gen_path = out_path + "/gen"
+    md5_path = out_path + "/gen/md5"
     _make_dir(gen_path)
     _make_dir(md5_path)
-    new_init_file_name = gen_path+"/"+sys.argv[3]
+    new_init_file_name = gen_path + "/" + sys.argv[3]
     if os.path.exists(new_init_file_name):
         os.remove(new_init_file_name)
     os.mknod(new_init_file_name)
