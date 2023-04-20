@@ -13,6 +13,9 @@
 
 import("//build/ohos.gni")
 
+iptables_path = rebase_path("//third_party/iptables")
+exec_script("install.sh", [ "$iptables_path" ])
+
 config("iptables_config") {
   cflags = [
     "-D_LARGEFILE_SOURCE=1",
