@@ -25,3 +25,4 @@ Makefile.in
 
 # vim/nano swap file
 *.swp
+.idea

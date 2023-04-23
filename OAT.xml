@@ -59,6 +59,9 @@
             <licensematcher name="GPL" desc="">
                 <licensetext name='This program is distributed under the terms of GNU GPL' desc=""/>
             </licensematcher>
+            <licensematcher name="GPLv2" desc="">
+                <licensetext name='GPLv2 and Artistic Licence 2.0 and ISC' desc=""/>
+            </licensematcher>
             <licensematcher name="libipt_CLUSTERIP.man" desc="">
                 <licensetext name='This module allows you to configure a simple cluster of nodes that share
 a certain IP and MAC address without an explicit load balancer in front of
@@ -178,10 +181,17 @@ cluster.' desc=""/>
                 <policyitem type="compatibility" name="GPL" path="extensions/libipt_TTL.c" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc="use iptables by independent process"/>
                 <policyitem type="compatibility" name="GPL" path="extensions/libip6t_HL.c" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc="use iptables by independent process"/>
                 <policyitem type="compatibility" name="libipt_CLUSTERIP.man" path="extensions/libipt_CLUSTERIP.man" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc="use iptables by independent process"/>
+                <policyitem type="compatibility" name="GPLv2" path="iptables.spec" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc="use iptables by independent process"/>
                 <policyitem type="license" name="*" path=".*" rule="may" group="defaultGroup" filefilter="defaultPolicyFilter" desc=""/>
                 <policyitem type="copyright" name="*" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc=""/>
             </policy>
         </policylist>
+
+        <filefilterlist>
+            <filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies">
+                <filteritem type="filename" name="iptables-1.8.7.tar.bz2"/>
+            </filefilter>
+        </filefilterlist>
     </oatconfig>
 </configuration>
 
