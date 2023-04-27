@@ -23,7 +23,11 @@
             "third_party": []
         },
         "build": {
-            "sub_component": [],
+            "sub_component": [
+                "//third_party/iptables:iptables",
+                "//third_party/iptables:iptables-restore",
+                "//third_party/iptables:iptables-save"
+            ],
             "inner_kits": [],
             "test": []
         }
