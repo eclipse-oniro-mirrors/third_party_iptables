@@ -2,7 +2,7 @@
 %global legacy_actions %{_libexecdir}/initscripts/legacy-actions
 Name:		  iptables
 Version:	  1.8.7
-Release:	  5
+Release:	  11
 Summary:	  IP packet filter administration utilities
 License:	  GPLv2 and Artistic Licence 2.0 and ISC
 URL:		  https://www.netfilter.org/
@@ -14,12 +14,21 @@ Source4:          sysconfig_iptables
 Source5:          sysconfig_ip6tables
 
 Patch0:		  bugfix-add-check-fw-in-entry.patch
+Patch1:           tests-extensions-add-some-testcases.patch
+Patch2:           backport-xshared-Fix-response-to-unprivileged-users.patch
+Patch3:           backport-Improve-error-messages-for-unsupported-extensions.patch
+Patch4:           backport-nft-Fix-EPERM-handling-for-extensions-without-rev-0.patch
+Patch5:           backport-libxtables-Register-only-the-highest-revision-extension.patch
+Patch6:           backport-nft-Expand-extended-error-reporting-to-nft_cmd-too.patch
+Patch7:           backport-xtables-restore-Extend-failure-error-message.patch
+Patch8:           enabled-makecheck-in-extensions.patch
 
 BuildRequires:    bison flex gcc kernel-headers libpcap-devel libselinux-devel systemd
 BuildRequires:    libmnl-devel libnetfilter_conntrack-devel libnfnetlink-devel libnftnl-devel
-BuildRequires:    autogen autoconf automake libtool iptables
+BuildRequires:    autogen autoconf automake libtool
 
 Requires:         %{name}-libs = %{version}-%{release}
+Conflicts:	  setup < 2.10.4-1
 
 Requires(post):   %{_sbindir}/update-alternatives
 Requires(postun): %{_sbindir}/update-alternatives
@@ -77,6 +86,9 @@ rm -f include/linux/types.h
 
 %make_build
 
+%check
+make check
+
 %install
 %make_install 
 
@@ -131,6 +143,9 @@ install -m 0755 -c ip6tabes.panic-legacy %{buildroot}/%{legacy_actions}/ip6table
 install -m 0755 iptables/iptables-apply %{buildroot}%{_sbindir}
 install -m 0755 iptables/iptables-apply.8 %{buildroot}%{_mandir}/man8
 
+# Remove /etc/ethertypes (now part of setup)
+rm -f %{buildroot}%{_sysconfdir}/ethertypes
+
 touch %{buildroot}%{_libexecdir}/arptables-helper
 
 touch %{buildroot}%{_mandir}/man8/arptables.8
@@ -138,7 +153,6 @@ touch %{buildroot}%{_mandir}/man8/arptables-save.8
 touch %{buildroot}%{_mandir}/man8/arptables-restore.8
 touch %{buildroot}%{_mandir}/man8/ebtables.8
 
-cp -a %{_libdir}/libip*tc.so.0.* %{buildroot}%{_libdir}
 %ldconfig_scriptlets
 
 %post
@@ -234,7 +248,6 @@ fi
 %defattr(-,root,root)
 %license COPYING
 %{script_path}/ip*tables.init
-%{_sysconfdir}/ethertypes
 %config(noreplace) %{_sysconfdir}/sysconfig/*
 %{_sbindir}/nfnl_osf
 %{_sbindir}/nfbpf_*
@@ -317,6 +330,42 @@ fi
 %{_mandir}/man8/xtables-legacy*
 
 %changelog
+* Wed Nov 30 2022 huangyu <huangyu106@huawei.com> - 1.8.7-11
+- Type:feature
+- ID:NA
+- SUG:NA
+- DESC:enabled DT test
+
+* Mon Nov 21 2022 huangyu <huangyu106@huawei.com> - 1.8.7-10
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:add some patches
+
+* Thu Sep 29 2022 huangyu <huangyu106@huawei.com> - 1.8.7-9
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:add some patches
+
+* Fri Jul 01 2022 xingwei <xingwei14@h-partners.com> - 1.8.7-8
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:/etc/ethertypes has been moved into the setup package
+
+* Wed Apr 06 2022 chenzhen <vchanger123456@163.com> - 1.8.7-7
+- Type:Enhancement
+- ID:NA
+- SUG:NA
+- DESC:add some testcases of extensions
+
+* Thu Mar 24 2022 yanglu <yanglu72@h-partners.com> - 1.8.7-6
+- Type:bugfix
+- ID:NA
+- SUG:NA
+- DESC:delete useless so files
+
 * Wed Mar 02 2022 duyiwei <duyiwei@kylinos.cn> - 1.8.7-5
 - change %systemd_requires to %{?systemd_requires}
 
@@ -335,10 +384,10 @@ fi
 * Mon Aug 02 2021 chenyanpanHW <chenyanpan@huawei.com> - 1.8.7-2
 - DESC: delete -S git from %autosetup, and delete BuildRequires git
 
-* Fri Jul 23 gaihuiying <gaihuiying11@huawei.com> - 1.8.7-1
+* Fri Jul 23 2021 gaihuiying <gaihuiying11@huawei.com> - 1.8.7-1
 - update to 1.8.7
 
-* Sat Jul 25 hanzhijun <hanzhijun1@huawei.com> - 1.8.5-1
+* Sat Jul 25 2020 hanzhijun <hanzhijun1@huawei.com> - 1.8.5-1
 - update to 1.8.5
 
 * Thu Apr 16 2020 chenzhen <chenzhen44@huawei.com> - 1.8.1-5
