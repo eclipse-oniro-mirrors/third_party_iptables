@@ -71,8 +71,8 @@ ohos_executable("iptables") {
     "//third_party/iptables/libxtables:libxtables",
   ]
 
-  part_name = "netmanager_base"
-  subsystem_name = "communication"
+  part_name = "iptables"
+  subsystem_name = "thirdparty"
 }
 
 ohos_executable("iptables-save") {
@@ -108,8 +108,8 @@ ohos_executable("iptables-save") {
     "//third_party/iptables/libxtables:libxtables",
   ]
 
-  part_name = "netmanager_base"
-  subsystem_name = "communication"
+  part_name = "iptables"
+  subsystem_name = "thirdparty"
 }
 
 ohos_executable("iptables-restore") {
@@ -145,6 +145,6 @@ ohos_executable("iptables-restore") {
     "//third_party/iptables/libxtables:libxtables",
   ]
 
-  part_name = "netmanager_base"
-  subsystem_name = "communication"
+  part_name = "iptables"
+  subsystem_name = "thirdparty"
 }
