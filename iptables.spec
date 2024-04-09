@@ -2,7 +2,7 @@
 %global legacy_actions %{_libexecdir}/initscripts/legacy-actions
 Name:		  iptables
 Version:	  1.8.7
-Release:	  11
+Release:	  14
 Summary:	  IP packet filter administration utilities
 License:	  GPLv2 and Artistic Licence 2.0 and ISC
 URL:		  https://www.netfilter.org/
@@ -22,6 +22,16 @@ Patch5:           backport-libxtables-Register-only-the-highest-revision-extensi
 Patch6:           backport-nft-Expand-extended-error-reporting-to-nft_cmd-too.patch
 Patch7:           backport-xtables-restore-Extend-failure-error-message.patch
 Patch8:           enabled-makecheck-in-extensions.patch
+
+Patch9:           backport-extensions-among-Fix-for-use-with-ebtables-restore.patch
+Patch10:          backport-extensions-libebt_redirect-Fix-xlate-return-code.patch
+Patch11:          backport-extensions-libipt_ttl-Sanitize-xlate-callback.patch
+Patch12:          backport-iptables-restore-Free-handle-with-test-also.patch
+Patch13:          backport-nft-Plug-memleak-in-nft_rule_zero_counters.patch
+Patch14:          backport-iptables-Plug-memleaks-in-print_firewall.patch
+Patch15:          backport-ebtables-translate-Print-flush-command-after-parsing-is-finished.patch
+Patch16:          backport-xtables-eb-fix-crash-when-opts-isn-t-reallocated.patch
+Patch17:          backport-iptables-Fix-handling-of-non-existent-chains.patch
 
 BuildRequires:    bison flex gcc kernel-headers libpcap-devel libselinux-devel systemd
 BuildRequires:    libmnl-devel libnetfilter_conntrack-devel libnfnetlink-devel libnftnl-devel
@@ -330,6 +340,30 @@ fi
 %{_mandir}/man8/xtables-legacy*
 
 %changelog
+* Mon Aug 14 2023 zhanghao <zhanghao383@huawei.com> - 1.8.7-14
+- Type:bugfix
+- CVE:NA
+- SUG:NA
+- DESC:iptables: Fix handling of non-existent chains
+
+* Wed Apr 12 2023 zhanghao <zhanghao383@huawei.com> - 1.8.7-13
+- Type:bugfix
+- CVE:NA
+- SUG:NA
+- DESC:xtables-eb: fix crash when opts isn't reallocated
+
+* Tue Mar 21 2023 zhanghao <zhanghao383@huawei.com> - 1.8.7-12
+- Type:bugfix
+- CVE:NA
+- SUG:NA
+- DESC:extensions among Fix for use with ebtables restore
+extensions libebt redirect Fix xlate return code
+extensions libipt ttl Sanitize xlate callback
+iptables restore  Free handle with test also
+nft Plug memleak in nft rule zero counters
+iptables Plug memleaks in print firewall
+ebtables translate Print flush command after parsing is finished
+
 * Wed Nov 30 2022 huangyu <huangyu106@huawei.com> - 1.8.7-11
 - Type:feature
 - ID:NA
