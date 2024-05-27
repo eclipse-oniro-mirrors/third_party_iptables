@@ -1,6 +1,6 @@
 [
     {
-        "Name"                  : "iptables",
+        "Name"                  : "openEuler:iptables",
         "License"               : "GPL V2.0",
         "License File"          : "COPYING",
         "Version Number"        : "1.8.7-14.oe2203sp3",
