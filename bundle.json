@@ -1,7 +1,7 @@
 {
     "name": "@ohos/iptables",
     "description": "iptables is the userspace command line program used to configure the Linux 2.4.x and later packet filtering ruleset. It is targeted towards system administrators.",
-    "version": "v1.8.7",
+    "version": "1.8.7",
     "license": "GPL V2.0",
     "publishAs": "code-segment",
     "segment": {
