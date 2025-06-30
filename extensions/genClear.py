@@ -1,6 +1,5 @@
-#!/bin/bash
-
-# Copyright (c) 2025 Huawei Device Co., Ltd.
+#!/usr/bin/env python
+# Copyright (c) 2022 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -13,15 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
-cd $1
-
-_all_patches=(
-  "0001-musl-build-fix.patch"
-)
-for filename in "${_all_patches[@]}"
-  do
-    echo "Applying patch ${filename}..."
-    patch -p1 < ${filename} --fuzz=0 --no-backup-if-mismatch
-  done
-exit 0
+import os
+import shutil
+oriPath = os.path.dirname(os.path.abspath(__file__))
+out_path = os.path.dirname(os.path.dirname(os.path.dirname(oriPath)))
+newPath = oriPath + "/out/gen"
+isExists=os.path.exists(newPath)
+# 判断结果
+if not isExists:
+    print (newPath)
+else:
+    # 如果目录存在则清除后重建
+    shutil.rmtree(newPath,True)
+    os.makedirs(newPath) 
+    print (newPath)
