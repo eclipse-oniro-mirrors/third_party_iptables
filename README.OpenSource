@@ -1,10 +1,10 @@
 [
     {
-        "Name"                  : "openEuler:iptables",
+        "Name"                  : "iptables",
         "License"               : "GPL V2.0",
         "License File"          : "COPYING",
-        "Version Number"        : "1.8.7-14.oe2203sp3",
-        "Owner"                 : "lichunlin2@huawei.com",
+        "Version Number"        : "1.8.11",
+        "Owner"                 : "heqianmo@huawei.com",
         "Upstream URL"          : "https://netfilter.org/",
         "Description"           : "iptables is the userspace command line program used to configure the Linux 2.4.x and later packet filtering ruleset. It is targeted towards system administrators."
     }

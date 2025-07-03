@@ -1,0 +1,52 @@
+From 81fa7efca6125a5774a222d3d0d6b039524408ef Mon Sep 17 00:00:00 2001
+From: Violet Purcell <vimproved@inventati.org>
+Date: Mon, 25 Nov 2024 19:47:33 -0500
+Subject: [PATCH] musl build fix
+
+---
+ extensions/libipt_CLUSTERIP.c | 2 +-
+ extensions/libipt_realm.c     | 2 +-
+ extensions/libxt_mac.c        | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/extensions/libipt_CLUSTERIP.c b/extensions/libipt_CLUSTERIP.c
+index b207cde3..aba38803 100644
+--- a/extensions/libipt_CLUSTERIP.c
++++ b/extensions/libipt_CLUSTERIP.c
+@@ -13,7 +13,7 @@
+ #if defined(__GLIBC__) && __GLIBC__ == 2
+ #include <net/ethernet.h>
+ #else
+-#include <linux/if_ether.h>
++#include <netinet/if_ether.h>
+ #endif
+ 
+ #include <xtables.h>
+diff --git a/extensions/libipt_realm.c b/extensions/libipt_realm.c
+index e01d048e..89f4bd3c 100644
+--- a/extensions/libipt_realm.c
++++ b/extensions/libipt_realm.c
+@@ -5,7 +5,7 @@
+ #if defined(__GLIBC__) && __GLIBC__ == 2
+ #include <net/ethernet.h>
+ #else
+-#include <linux/if_ether.h>
++#include <netinet/if_ether.h>
+ #endif
+ #include <xtables.h>
+ #include <linux/netfilter_ipv4/ipt_realm.h>
+diff --git a/extensions/libxt_mac.c b/extensions/libxt_mac.c
+index 55891b2b..c353d694 100644
+--- a/extensions/libxt_mac.c
++++ b/extensions/libxt_mac.c
+@@ -2,7 +2,7 @@
+ #if defined(__GLIBC__) && __GLIBC__ == 2
+ #include <net/ethernet.h>
+ #else
+-#include <linux/if_ether.h>
++#include <netinet/if_ether.h>
+ #endif
+ #include <xtables.h>
+ #include <linux/netfilter/xt_mac.h>
+-- 
+2.47.0
