@@ -22,6 +22,12 @@ _all_patches=(
 for filename in "${_all_patches[@]}"
   do
     echo "Applying patch ${filename}..."
-    patch -p1 < ${filename} --fuzz=0 --no-backup-if-mismatch
+    if patch --dry-run -p1 < ${filename} > /dev/null 2>&1
+      then
+        echo "Verify patch ${filename} ok. start apply."
+        patch -p1 < ${filename} --fuzz=0 --no-backup-if-mismatch
+    else
+      echo "Verify patch ${filename} not ok. patch already apply? skip apply."
+    fi
   done
 exit 0
