@@ -38,6 +38,7 @@ config("iptables_config") {
 }
 
 ohos_executable("iptables") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "//third_party/iptables/iptables/ip6tables-standalone.c",
     "//third_party/iptables/iptables/ip6tables.c",
@@ -77,6 +78,7 @@ ohos_executable("iptables") {
 }
 
 ohos_executable("iptables-save") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "//third_party/iptables/iptables/ip6tables-standalone.c",
     "//third_party/iptables/iptables/ip6tables.c",
@@ -115,6 +117,7 @@ ohos_executable("iptables-save") {
 }
 
 ohos_executable("iptables-restore") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "//third_party/iptables/iptables/ip6tables-standalone.c",
     "//third_party/iptables/iptables/ip6tables.c",

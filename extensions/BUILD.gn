@@ -45,6 +45,7 @@ args_libext = [
 exec_script("genInit.py", args_libext)
 
 ohos_static_library("libext") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "$LIBEXT_COMMON_PATH/initext.c",
     "$LIBEXT_COMMON_PATH/libxt_addrtype.c",
@@ -140,6 +141,7 @@ args_libext4 = [
 exec_script("genInit.py", args_libext4)
 
 ohos_static_library("libext4") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "$LIBEXT_COMMON_PATH/initext4.c",
     "$LIBEXT_COMMON_PATH/libipt_ah.c",
@@ -194,6 +196,7 @@ args_libext6 = [
 exec_script("genInit.py", args_libext6)
 
 ohos_static_library("libext6") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "$LIBEXT_COMMON_PATH/initext6.c",
     "$LIBEXT_COMMON_PATH/libip6t_ah.c",
