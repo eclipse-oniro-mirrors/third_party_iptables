@@ -44,6 +44,9 @@ ohos_static_library("libxtables") {
     "-DXTABLES_INTERNAL",
     "-DXTABLES_LIBDIR=\"xtables_libdir_not_used\"",
     "-Wno-missing-field-initializers",
+    "-Oz",
+    "-fdata-sections",
+    "-ffunction-sections",
   ]
 
   deps = []

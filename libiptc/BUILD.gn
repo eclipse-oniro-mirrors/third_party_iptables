@@ -36,6 +36,9 @@ ohos_static_library("libip4tc") {
     "-Wno-unused-parameter",
     "-Wno-pointer-sign",
     "-Wno-unused-function",
+    "-Oz",
+    "-fdata-sections",
+    "-ffunction-sections",
   ]
 
   deps = []
@@ -67,6 +70,9 @@ ohos_static_library("libip6tc") {
     "-Wno-unused-parameter",
     "-Wno-pointer-sign",
     "-Wno-unused-function",
+    "-Oz",
+    "-fdata-sections",
+    "-ffunction-sections",
   ]
 
   deps = []
