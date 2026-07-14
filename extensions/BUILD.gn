@@ -32,6 +32,9 @@ config("ext_config") {
     "-Wno-missing-field-initializers",
     "-Wno-pointer-bool-conversion",
     "-Wno-tautological-pointer-compare",
+    "-Oz",
+    "-fdata-sections",
+    "-ffunction-sections",
   ]
 }
 
@@ -180,6 +183,9 @@ ohos_static_library("libext4") {
     "-Wno-missing-field-initializers",
     "-Wno-pointer-bool-conversion",
     "-Wno-tautological-pointer-compare",
+    "-Oz",
+    "-fdata-sections",
+    "-ffunction-sections",
   ]
   deps = []
   part_name = "iptables"
@@ -242,6 +248,9 @@ ohos_static_library("libext6") {
     "-Wno-missing-field-initializers",
     "-Wno-pointer-bool-conversion",
     "-Wno-tautological-pointer-compare",
+    "-Oz",
+    "-fdata-sections",
+    "-ffunction-sections",
   ]
   deps = []
   part_name = "iptables"

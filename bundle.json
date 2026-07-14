@@ -26,33 +26,13 @@
         },
         "build": {
             "sub_component": [
-                "//third_party/iptables:iptables",
-                "//third_party/iptables:iptables-restore",
-                "//third_party/iptables:iptables-save"
+                "//third_party/iptables:iptables"
             ],
             "inner_kits": [
-	                    {
-                    "name": "//third_party/iptables:iptables",
-                    "header": {
-                        "header_files": [],
-                        "header_base": "//third_party/iptables/include"
-                    }
-                },
                 {
-                    "name": "//third_party/iptables:iptables-restore",
-                    "header": {
-                        "header_files": [],
-                        "header_base": "//third_party/iptables/include"
-                    }
-                },
-                {
-                    "name": "//third_party/iptables:iptables-save",
-                    "header": {
-                        "header_files": [],
-                        "header_base": "//third_party/iptables/include"
-                    }
+                    "name":"//third_party/iptables:iptables"
                 }
-	    ],
+            ],
             "test": []
         }
     }
