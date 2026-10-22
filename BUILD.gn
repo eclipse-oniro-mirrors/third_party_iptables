@@ -13,6 +13,10 @@
 
 import("//build/ohos.gni")
 
+declare_args() {
+  iptables_install_updater_image = false
+}
+
 iptables_path = rebase_path("//third_party/iptables")
 exec_script("install.sh", [ "$iptables_path" ])
 
@@ -93,4 +97,7 @@ ohos_executable("iptables") {
   ]
   part_name = "iptables"
   subsystem_name = "thirdparty"
+  if (iptables_install_updater_image) {
+    install_images = [ "system", "updater" ]
+  }
 }
