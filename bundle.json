@@ -14,7 +14,9 @@
         "name": "iptables",
         "subsystem": "thirdparty",
         "syscap": [],
-        "features": [],
+        "features": [
+            "iptables_install_updater_image"
+        ],
         "adapted_system_type": [
             "standard"
         ],
