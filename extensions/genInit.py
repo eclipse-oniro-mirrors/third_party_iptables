@@ -14,6 +14,8 @@
 
 from dataclasses import replace
 import os
+import io
+import hashlib
 import shutil
 import sys
 import subprocess
@@ -36,16 +38,13 @@ def _make_dir(file_path):
 
 
 def _read_file(file_path):
-    file_handler = open(file_path, 'r+', encoding='utf-8')
-    content = file_handler.read()
-    file_handler.close
+    with open(file_path, 'r', encoding='utf-8') as file_handler:
+        return file_handler.read()
 
-    return content
 
 def _write_file(file_path, content):
-    file_handler = open(file_path, 'w', encoding='utf-8')
-    file_handler.write(content)
-    file_handler.close
+    with open(file_path, 'w', encoding='utf-8') as file_handler:
+        file_handler.write(content)
 
 
 def _write_internal_methods(new_init_file, internal_method_name, init_file_list):
@@ -57,17 +56,11 @@ def _write_internal_methods(new_init_file, internal_method_name, init_file_list)
 
 
 def _need_rebuild(src_file, dest_file, src_md5_file):
-    if os.path.exists(src_file) and os.path.exists(dest_file) and os.path.exists(src_md5_file):
-        this_md5, err, returncode = _run_cmd("md5sum " + src_file + " | awk '{print $1}'")
-        last_md5, err, returncode = _run_cmd("cat " + src_md5_file)
-        if this_md5 == last_md5:
-            return 0
-        else:
-            return 1
-    else:
-        print("src_file, dest_file or src_md5_file doesn't exist. Generate new md5 file.")
-        this_md5, err, returncode = _run_cmd("md5sum " + src_file + " | awk '{print $1}' >" + src_md5_file)
+    if not os.path.exists(dest_file) or not os.path.exists(src_md5_file):
         return 1
+    with open(src_file, 'rb') as source:
+        current = hashlib.md5(source.read()).hexdigest()
+    return int(current != _read_file(src_md5_file).strip())
 
 
 def main():
@@ -83,10 +76,8 @@ def main():
     _make_dir(gen_path)
     _make_dir(md5_path)
     new_init_file_name = gen_path + "/" + sys.argv[3]
-    if os.path.exists(new_init_file_name):
-        os.remove(new_init_file_name)
-    os.mknod(new_init_file_name)
-    new_init_file = open(new_init_file_name, 'a', encoding='utf-8')
+    # GN evaluates this script on every generation; keep unchanged C inputs.
+    new_init_file = io.StringIO()
 
     init_file_list = []
     for filter_file in os.listdir(ori_path):
@@ -108,10 +99,18 @@ def main():
 
                 new_init_file.write("extern " + "void  " + replace_init_text + ";\n")
                 init_file_list.append(filter_file.rstrip("\.c") + "_init" + "();\n")
+            # Commit the source fingerprint only after copying and rewriting
+            # succeeded, so an interrupted generation cannot cache stale C.
+            if need_rebuild:
+                with open(src_path, 'rb') as source:
+                    _write_file(src_md5_file, hashlib.md5(source.read()).hexdigest() + "\n")
 
     internal_method_name = sys.argv[4]
     _write_internal_methods(new_init_file, internal_method_name, init_file_list)
-    new_init_file.close
+    content = new_init_file.getvalue()
+    if not os.path.exists(new_init_file_name) or _read_file(new_init_file_name) != content:
+        _write_file(new_init_file_name, content)
+    new_init_file.close()
 
 
 if __name__ == '__main__':
